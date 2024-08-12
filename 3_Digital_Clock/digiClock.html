@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock with Unix Timestamp</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        font-family: "Roboto", sans-serif;
+        color: #fff;
+      }
+
+      .clock-container {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 30px 50px;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .clock-container:hover {
+        transform: scale(1.05);
+      }
+
+      .clock {
+        font-size: 4rem;
+        letter-spacing: 0.2em;
+        color: rgb(255, 255, 255);
+        text-shadow: 0 0 8px rgba(181, 168, 168, 0.8);
+      }
+
+      .timestamp {
+        font-size: 1.2rem;
+        margin-top: 20px;
+        color: #ccc;
+        text-shadow: 0 0 5px rgba(204, 204, 204, 0.7);
+      }
+
+      #human-readable {
+        font-size: 1.2rem;
+        color: #ffeb3b;
+        text-shadow: 0 0 5px rgba(255, 235, 59, 0.7);
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="clock-container">
+      <div id="clock" class="clock"></div>
+      <hr />
+      <div id="timestamp" class="timestamp"></div>
+      <div id="human-readable" class="timestamp"></div>
+    </div>
+
+    <script>
+      const clockElement = document.getElementById("clock");
+      const timestampElement = document.getElementById("timestamp");
+      const humanReadableElement = document.getElementById("human-readable");
+
+      function updateTime() {
+        const now = new Date();
+        clockElement.innerHTML = now.toLocaleTimeString();
+
+        const timestamp = Math.floor(now.getTime() / 1000);
+        timestampElement.innerHTML = `Unix Timestamp: ${timestamp}`;
+
+        const humanReadableDate = new Date(timestamp * 1000).toLocaleString();
+        humanReadableElement.innerHTML = `Human-Readable: ${humanReadableDate}`;
+      }
+
+      setInterval(updateTime, 1000);
+      updateTime();
+    </script>
+  </body>
+</html>
