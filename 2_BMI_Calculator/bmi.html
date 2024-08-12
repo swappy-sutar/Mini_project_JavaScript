@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI</title>
+  </head>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 60px;
+      background-color: #333;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      margin: 30px;
+      font-size: 28px;
+      color: #1db954;
+    }
+    h3 span {
+      padding: 10px;
+      background: #1db954;
+      border: 2px solid white;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    form p {
+      margin: 10px 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 18px;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 24px);
+      padding: 10px;
+      margin: 0 auto;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #222;
+      color: #fff;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 20px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #1db954;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1aa34a;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    span {
+      font-weight: bold;
+    }
+  </style>
+  <body style="background: black; color: white">
+    <div class="container">
+      <h3>
+        <span><i> Swappy's </i></span>
+      </h3>
+      <h1>BMI Calculator</h1>
+      <form>
+        <p>
+          <label>Height in CM:</label>
+          <input type="text" id="height" />
+        </p>
+        <p>
+          <label>Weight in KG:</label>
+          <input type="text" id="weight" />
+        </p>
+        <button type="submit">Calculate</button>
+        <hr />
+        <div id="result"></div>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const height = parseInt(document.querySelector("#height").value);
+      const weight = parseInt(document.querySelector("#weight").value);
+      const result = document.querySelector("#result");
+
+      if (!height || height <= 0 || isNaN(height)) {
+        result.innerHTML = `Please enter a valid height: ${height}`;
+      } else if (!weight || weight <= 0 || isNaN(weight)) {
+        result.innerHTML = `Please enter a valid weight: ${weight}`;
+      } else {
+        const bmi = (weight / ((height * height) / 10000)).toFixed(2);
+
+        if (bmi <= 16.8) {
+          result.innerHTML = `BMI is : "${bmi}" <span style = "color: orange;"> Under weight</span>`;
+        } else if (bmi >= 16.8 && bmi <= 24.9) {
+          result.innerHTML = `BMI is : "${bmi}" <span style = "color: green;" > Normal range</span>`;
+        } else {
+          result.innerHTML = `BMI is : "${bmi}" <span style = "color: red;"> Over weight!!</span>`;
+        }
+      }
+    });
+  </script>
+</html>
